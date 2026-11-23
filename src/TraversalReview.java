@@ -51,7 +51,17 @@ public class TraversalReview {
      * @return the sum of the positive values in the tree
      */
     public static int positiveSum(TreeNode node) {
-        return -1;
+        if(node == null) return 0 ;
+        int pSum = 0;
+        int pLeft = positiveSum(node.left);
+        int pRight = positiveSum(node.right);
+        if( pLeft >= 0 )
+            pSum += pLeft ;
+        if(pRight >= 0)
+            pSum += pRight;
+        if(node.data >= 0)
+            pSum += node.data;
+        return pSum;
     }
 
     /**

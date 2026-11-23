@@ -52,15 +52,20 @@ public class TraversalReview {
      */
     public static int positiveSum(TreeNode node) {
         if(node == null) return 0 ;
+
+        // create variable
         int pSum = 0;
         int pLeft = positiveSum(node.left);
         int pRight = positiveSum(node.right);
+
+        // check each one day one
         if( pLeft >= 0 )
             pSum += pLeft ;
         if(pRight >= 0)
             pSum += pRight;
         if(node.data >= 0)
             pSum += node.data;
+
         return pSum;
     }
 
@@ -87,7 +92,22 @@ public class TraversalReview {
      * @return
      */
     public static int evenMax(TreeNode node) {
-        return Integer.MIN_VALUE;
+        if(node == null) return Integer.MIN_VALUE;
+
+        int left= evenMax(node.left);
+        int right = evenMax(node.right);
+        int max = Integer.MIN_VALUE;
+
+        if(left % 2 == 0 && left > max)
+            max = left;
+
+        if(right % 2 == 0 && right > max)
+            max = right;
+
+        if(node.data % 2 == 0 && node.data > max)
+            max = node.data;
+        
+        return max;
     }
 
     /**

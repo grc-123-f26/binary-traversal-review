@@ -171,7 +171,7 @@ public class TraversalReview {
         if (node == null) {return true;}
         if (node.left != null && node.right == null) {return false;}
         if (node.left == null && node.right != null) {return false;}
-        
+
         return noSingleChildren(node.left) && noSingleChildren(node.right);
     }
 
@@ -198,7 +198,14 @@ public class TraversalReview {
      * @return whether there is it least one zero value in the tree.
      */
     public static boolean hasZero(TreeNode node) {
-        return false;
+        if (node == null) {
+            return false;
+        }        
+        if (node.data == 0) {
+            return true; 
+        }
+
+        return (hasZero(node.left) || hasZero(node.right));
     }
 
     /**

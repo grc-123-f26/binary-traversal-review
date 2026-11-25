@@ -217,9 +217,7 @@ public class TraversalReview {
     public static boolean hasZero(TreeNode node) {
         if (node == null) return false;
 
-        if (node.data == 0) {
-            return true;
-        }
+        if (node.data == 0) return true;
 
         boolean subTreeLeft = hasZero(node.left);
         boolean subTreeRight = hasZero(node.right);
@@ -252,7 +250,14 @@ public class TraversalReview {
      * @return whether every value is divisible by k
      */
     public static boolean hasNonDivisible(TreeNode node, int k) {
-        return false;
+        if (node == null) return false;
+
+        if (node.data % k != 0) return true;
+
+        boolean subTreeLeft = hasNonDivisible(node.left, k);
+        boolean subTreeRight = hasNonDivisible(node.right, k);
+
+        return subTreeLeft || subTreeRight;
     }
 
     /**

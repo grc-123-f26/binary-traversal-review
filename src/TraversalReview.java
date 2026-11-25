@@ -23,7 +23,16 @@ public class TraversalReview {
      * @return three times the sum of the nodes in the tree
      */
     public static int tripleSum(TreeNode node) {
-        return -1;
+        if (node == null) return 0;
+
+        int root = node.data * 3;
+
+        int leftTotal = tripleSum(node.left);
+        int rightTotal = tripleSum(node.right);
+
+        int total = leftTotal + rightTotal + root;
+
+        return total;
     }
 
     /**
@@ -50,7 +59,18 @@ public class TraversalReview {
      * @return the sum of the positive values in the tree
      */
     public static int positiveSum(TreeNode node) {
-        return -1;
+        if (node == null) return 0;
+
+        int total = 0;
+
+        if (node.data > 0) {
+            total += node.data;
+        }
+
+        total += positiveSum(node.left);
+        total += positiveSum(node.right);
+
+        return total;
     }
 
     /**
@@ -76,7 +96,20 @@ public class TraversalReview {
      * @return
      */
     public static int evenMax(TreeNode node) {
-        return Integer.MIN_VALUE;
+        if (node == null) return Integer.MIN_VALUE;
+
+        int max = Integer.MIN_VALUE;
+
+        if (node.data % 2 == 0 && node.data > max) {
+            max = node.data;
+        }
+
+        int leftMax = evenMax(node.left);
+        int rightMax = evenMax(node.right);
+
+        int subTreeMax = Math.max(leftMax, rightMax);
+        
+        return Math.max(subTreeMax, max);
     }
 
     /**
@@ -104,7 +137,20 @@ public class TraversalReview {
      * @return whether all child nodes have strictly greater values than the parents
      */
     public static boolean isIncreasing(TreeNode node) {
-        return false;
+        if (node == null) return true;
+
+        if (node.left != null && node.left.data <= node.data) {
+            return false;
+        }
+
+        if (node.right != null && node.right.data <= node.data) {
+            return false;
+        }
+
+        boolean leftIncreasing = isIncreasing(node.left);
+        boolean rightIncreasing = isIncreasing(node.right);
+
+        return leftIncreasing && rightIncreasing;
     } 
 
     /**
@@ -130,7 +176,20 @@ public class TraversalReview {
      * @return whether every node has 0 or 2 children
      */
     public static boolean noSingleChildren(TreeNode node) {
-        return false;
+        if (node == null) return true;
+
+        if (node.left == null && node.right != null) {
+            return false;
+        }
+
+        if (node.left != null && node.right == null) {
+            return false;
+        }
+
+        boolean subTreeLeft = noSingleChildren(node.left);
+        boolean subTreeRight = noSingleChildren(node.right);
+
+        return subTreeLeft && subTreeRight;
     }
 
     /**
@@ -156,7 +215,14 @@ public class TraversalReview {
      * @return whether there is it least one zero value in the tree.
      */
     public static boolean hasZero(TreeNode node) {
-        return false;
+        if (node == null) return false;
+
+        if (node.data == 0) return true;
+
+        boolean subTreeLeft = hasZero(node.left);
+        boolean subTreeRight = hasZero(node.right);
+
+        return subTreeLeft || subTreeRight;
     }
 
     /**
@@ -184,7 +250,14 @@ public class TraversalReview {
      * @return whether every value is divisible by k
      */
     public static boolean hasNonDivisible(TreeNode node, int k) {
-        return false;
+        if (node == null) return false;
+
+        if (node.data % k != 0) return true;
+
+        boolean subTreeLeft = hasNonDivisible(node.left, k);
+        boolean subTreeRight = hasNonDivisible(node.right, k);
+
+        return subTreeLeft || subTreeRight;
     }
 
     /**
@@ -210,6 +283,11 @@ public class TraversalReview {
      * @return a string with all the values of the tree concatenated in-order
      */
     public static String concatenate(TreeNode node) {
-        return "";
+        if (node == null) return "";
+
+        String subTreeLeft = concatenate(node.left);
+        String subTreeRight = concatenate(node.right);
+    
+        return subTreeLeft + node.data + subTreeRight;
     }
 }

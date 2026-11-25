@@ -88,8 +88,19 @@ public class TraversalReview {
      * @return
      */
     public static int evenMax(TreeNode node) {
+    if (node == null) {
         return Integer.MIN_VALUE;
     }
+
+    int left = evenMax(node.left);
+    int right = evenMax(node.right);
+
+    if (node.data % 2 == 0) {
+        return Math.max(node.data, Math.max(left, right));
+    }
+
+    return Math.max(left, right);
+}
 
     /**
      * Returns whether all children of every node in a binary tree has a value

@@ -285,12 +285,9 @@ public class TraversalReview {
     public static String concatenate(TreeNode node) {
         if (node == null) return "";
 
-        String values = "";
-
         String subTreeLeft = concatenate(node.left);
-        values += node.data;
         String subTreeRight = concatenate(node.right);
     
-        return subTreeLeft + values + subTreeRight;
+        return subTreeLeft + node.data + subTreeRight;
     }
 }

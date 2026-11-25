@@ -203,9 +203,16 @@ public class TraversalReview {
      * @return whether there is it least one zero value in the tree.
      */
     public static boolean hasZero(TreeNode node) {
+    if (node == null) {
         return false;
     }
 
+    if (node.data == 0) {
+        return true;
+    }
+
+    return hasZero(node.left) || hasZero(node.right);
+}
     /**
      * Returns whether there exists at least one value in the tree that is not divisible by k.
      * 

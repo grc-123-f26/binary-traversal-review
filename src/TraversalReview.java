@@ -238,8 +238,16 @@ public class TraversalReview {
      * @return whether every value is divisible by k
      */
     public static boolean hasNonDivisible(TreeNode node, int k) {
+    if (node == null) {
         return false;
     }
+
+    if (node.data % k != 0) {
+        return true;
+    }
+
+    return hasNonDivisible(node.left, k) || hasNonDivisible(node.right, k);
+}
 
     /**
      * Returns a String of the concatenated values of the tree traversed in-order.

@@ -14,6 +14,7 @@ public class TraversalReviewTest {
     @Test
     public void testTripleSum_null() {
         assertEquals(0, TraversalReview.tripleSum(null));
+        
     }
 
     /**

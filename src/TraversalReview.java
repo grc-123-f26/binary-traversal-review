@@ -53,9 +53,17 @@ public class TraversalReview {
      * @param node the root of the tree
      * @return the sum of the positive values in the tree
      */
-    public static int positiveSum(TreeNode node) {
-        return -1;
+   public static int positiveSum(TreeNode node) {
+    if (node == null) {
+        return 0;
     }
+
+    if (node.data > 0) {
+        return node.data + positiveSum(node.left) + positiveSum(node.right);
+    }
+
+    return positiveSum(node.left) + positiveSum(node.right);
+}
 
     /**
      * Returns the maximum even value in the tree.
